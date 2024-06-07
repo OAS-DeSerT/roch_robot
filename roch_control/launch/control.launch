@@ -5,7 +5,7 @@
  <!-- load configuration -->
   <rosparam command="load" file="$(find roch_control)/config/imu_sensor_controller.yaml" />
 
- <!-- --><node name="base_controller_spawner" pkg="controller_manager" type="spawner"  args="roch_joint_publisher roch_velocity_controller roch_sensor_controller --shutdown-timeout 3"/> 
+ <!-- --><node name="base_controller_spawner" pkg="controller_manager" type="spawner"  args="roch_joint_publisher roch_velocity_controller roch_sensor_controller"/> 
 
   <!-- The odometry estimator using robot_localization package -->
   <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">

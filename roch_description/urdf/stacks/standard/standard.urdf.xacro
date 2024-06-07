@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!--
   standard stacks of Roch
- -->
+-->
 <robot name="stack_standard" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find roch_description)/urdf/common_properties.urdf.xacro"/>
   
   <!-- hexagons for roch -->
-    <!-- Xacro properties -->
+  <!-- Xacro properties -->
   <xacro:property name="M_SCALE" value="0.001"/>
-<!-- Xacro macros -->
+  <!-- Xacro macros -->
   <!-- Pole bottom macros -->
   <xacro:macro name="stack_bottom_pole" params="parent number x_loc y_loc z_loc">
     <joint name="pole_bottom_${number}_joint" type="fixed">
@@ -98,20 +98,20 @@
       </inertial>
     </link>
   </xacro:macro>
-<!-- 
+  <!-- 
     Stack macro - all the components relative transforms are made with respect 
     to the parent link (usually base_link). They could be made relative to each
     other, but there is no necessary reason to do so.
   -->
- <xacro:macro name="stack_standard" params="parent">
+  <xacro:macro name="stack_standard" params="parent">
    
-    <stack_bottom_pole parent="${parent}" number="0" x_loc= "0.1" y_loc= "0.115" z_loc="0.121"/>
-    <stack_bottom_pole parent="${parent}" number="1" x_loc= "-0.1" y_loc= "0.115" z_loc="0.121"/>
-    <stack_bottom_pole parent="${parent}" number="2" x_loc="0.1" y_loc= "-0.115" z_loc="0.121"/>
-    <stack_bottom_pole parent="${parent}" number="3" x_loc= "-0.1" y_loc="-0.115" z_loc="0.121"/>
+    <xacro:stack_bottom_pole parent="${parent}" number="0" x_loc= "0.1" y_loc= "0.115" z_loc="0.121"/>
+    <xacro:stack_bottom_pole parent="${parent}" number="1" x_loc= "-0.1" y_loc= "0.115" z_loc="0.121"/>
+    <xacro:stack_bottom_pole parent="${parent}" number="2" x_loc="0.1" y_loc= "-0.115" z_loc="0.121"/>
+    <xacro:stack_bottom_pole parent="${parent}" number="3" x_loc= "-0.1" y_loc="-0.115" z_loc="0.121"/>
   
-   <!-- bottom plate for Roch-->
-   <joint name="plate_bottom_joint" type="fixed">
+    <!-- bottom plate for Roch-->
+    <joint name="plate_bottom_joint" type="fixed">
       <origin xyz="0 0.0 0.23" rpy="0 0 0"/>
       <parent link="base_link"/>
       <child link="plate_bottom_link"/>
@@ -122,7 +122,7 @@
         <geometry>
           <mesh filename="package://roch_description/meshes/stacks/plate_bottom.dae"/>
         </geometry>
-	<xacro:insert_block name="roch_dark_white"/>
+	      <xacro:insert_block name="roch_dark_white"/>
       </visual>  
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -139,13 +139,13 @@
       </inertial>
     </link>
 
-    <stack_middle_pole parent="${parent}" number="0" x_loc= "0.1" y_loc= "0.115" z_loc="0.346"/>
-    <stack_middle_pole parent="${parent}" number="1" x_loc= "-0.1" y_loc= "0.115" z_loc="0.346"/>
-    <stack_middle_pole parent="${parent}" number="2" x_loc="0.1" y_loc= "-0.115" z_loc="0.346"/>
-    <stack_middle_pole parent="${parent}" number="3" x_loc= "-0.1" y_loc="-0.115" z_loc="0.346"/>
+    <xacro:stack_middle_pole parent="${parent}" number="0" x_loc= "0.1" y_loc= "0.115" z_loc="0.346"/>
+    <xacro:stack_middle_pole parent="${parent}" number="1" x_loc= "-0.1" y_loc= "0.115" z_loc="0.346"/>
+    <xacro:stack_middle_pole parent="${parent}" number="2" x_loc="0.1" y_loc= "-0.115" z_loc="0.346"/>
+    <xacro:stack_middle_pole parent="${parent}" number="3" x_loc= "-0.1" y_loc="-0.115" z_loc="0.346"/>
 
-   <!-- middle plate for Roch-->
-   <joint name="plate_middle_joint" type="fixed">
+    <!-- middle plate for Roch-->
+    <joint name="plate_middle_joint" type="fixed">
       <origin xyz="0 0.0 0.46" rpy="0 0 0"/>
       <parent link="base_link"/>
       <child link="plate_middle_link"/>
@@ -156,7 +156,7 @@
         <geometry>
           <mesh filename="package://roch_description/meshes/stacks/plate_middle.dae"/>
         </geometry>
-	<xacro:insert_block name="roch_black"/>
+	      <xacro:insert_block name="roch_black"/>
       </visual>  
       <collision>
         <origin xyz="0.0 0 0" rpy="0 0 0"/>
@@ -173,12 +173,12 @@
       </inertial>
     </link>
 
-    <stack_top_pole parent="${parent}" number="0" x_loc="-0.16" y_loc= "0.0" z_loc="0.576"/>
-    <stack_top_pole parent="${parent}" number="1" x_loc="-0.13" y_loc= "0.06" z_loc="0.576"/>
-    <stack_top_pole parent="${parent}" number="2" x_loc="-0.13" y_loc= "-0.06" z_loc="0.576"/>
+    <xacro:stack_top_pole parent="${parent}" number="0" x_loc="-0.16" y_loc= "0.0" z_loc="0.576"/>
+    <xacro:stack_top_pole parent="${parent}" number="1" x_loc="-0.13" y_loc= "0.06" z_loc="0.576"/>
+    <xacro:stack_top_pole parent="${parent}" number="2" x_loc="-0.13" y_loc= "-0.06" z_loc="0.576"/>
    
-<!-- sensor plate for Roch-->
-   <joint name="plate_sensor_joint" type="fixed">
+    <!-- sensor plate for Roch-->
+    <joint name="plate_sensor_joint" type="fixed">
       <origin xyz="-0.14 0.0 0.691" rpy="0 0 0"/>
       <parent link="base_link"/>
       <child link="plate_sensor_link"/>
@@ -189,12 +189,12 @@
         <geometry>
           <mesh filename="package://roch_description/meshes/stacks/plate_sensor.dae"/>
         </geometry>
-	<xacro:insert_block name="roch_white"/>
+	      <xacro:insert_block name="roch_white"/>
       </visual>  
       <collision>
         <origin xyz="-0.145 0.0 0.616" rpy="0 0 0"/>
         <geometry>
-           <box size="0.07 0.14 0.005"/>
+          <box size="0.07 0.14 0.005"/>
         </geometry>
       </collision>
       <inertial>

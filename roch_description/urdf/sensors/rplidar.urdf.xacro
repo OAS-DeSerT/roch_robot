@@ -62,15 +62,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       </collision>
     </link>
 
-     <joint name="base_laser_link_mount" type="fixed">
-        <origin xyz="0.1 0 0.165" rpy="0 0 0" />
-        <parent link="${parent}" />
-        <child link="base_laser_link" />
-      </joint>
+    <joint name="base_laser_link_mount" type="fixed">
+      <origin xyz="0.1 0 0.165" rpy="0 0 0" />
+      <parent link="${parent}" />
+      <child link="base_laser_link" />
+    </joint>
 
     <link name="base_laser"/>
     <joint name="base_laser_joint" type="fixed">
-      <origin xyz="0 0 0.04076" rpy=" 0 0 2.2689" />
+      <origin xyz="0 0 0.04076" rpy="0 0 ${M_PI}" />  <!-- y2.2689 -->
       <parent link="base_laser_link" />
       <child link="base_laser" />
     </joint>

@@ -5,12 +5,12 @@
   <xacro:include filename="$(find roch_description)/urdf/common_properties.urdf.xacro"/> 
   <xacro:include filename="$(find roch_description)/urdf/roch_gazebo.urdf.xacro"/>
   <xacro:include filename="$(find roch_description)/urdf/roch_sensors.urdf.xacro"/>
-  <property name="M_PI" value="3.14159"/>
+  <xacro:property name="M_PI" value="3.14159"/>
 
   <!-- Base Size -->
-  <property name="base_x_size" value="0.353080" />
-  <property name="base_y_size" value="0.299330" />
-  <property name="base_z_size" value="0.150000" />
+  <xacro:property name="base_x_size" value="0.353080" />
+  <xacro:property name="base_y_size" value="0.299330" />
+  <xacro:property name="base_z_size" value="0.150000" />
   <!-- Wheel Mounting Positions -->
   <xacro:property name="wheelbase" value="-0.095" />
   <xacro:property name="track" value="0.236" />
@@ -20,8 +20,8 @@
   <xacro:property name="wheel_length" value="0.014" />
   <xacro:property name="wheel_radius" value="0.0475" />
 
- <!---->
- <xacro:macro name="roch">  
+  <!---->
+  <xacro:macro name="roch">  
 
     <!-- Base link is on the ground under the robot -->
     <link name="base_footprint"/>
@@ -40,15 +40,15 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-	  <mesh filename="package://roch_description/meshes/chassis.dae"/>
+          <mesh filename="package://roch_description/meshes/chassis.dae"/>
         </geometry>
-       <xacro:insert_block name="roch_dark_white" />
+        <xacro:insert_block name="roch_dark_white" />
       </visual>
 
       <collision>
         <origin xyz="0 0 ${base_z_size*3/4}" rpy="0 0 0" />
         <geometry>
-         <box size="0.35308 .29933 .155"/>  
+          <box size="0.35308 .29933 .155"/>  
         </geometry>
       </collision>
       <inertial>
@@ -68,11 +68,10 @@
         <inertia ixx="0.0668325" ixy="0.0" ixz="0.0" iyy="0.0668325" iyz="0.0" izz="0.10854" />
       </inertial>
     </link>
-    <gazebo reference="base_link">
-    </gazebo>
-<!-- Xacro macros -->
+    <gazebo reference="base_link"/>
 
-  <!-- roch wheel macros -->
+    <!-- Xacro macros -->
+    <!-- roch wheel macros -->
     <xacro:roch_wheel wheel_prefix="front_left">
       <origin xyz="0 ${track/2} ${wheel_vertical_offset-0.0005}" rpy="0 0 0" />
     </xacro:roch_wheel>
@@ -80,8 +79,8 @@
       <origin xyz="0 ${-track/2} ${wheel_vertical_offset-0.0005}" rpy="0 0 0" />
     </xacro:roch_wheel>
    
-   <link name="front_wheel_link">
-    <collision>
+    <link name="front_wheel_link">
+      <collision>
         <geometry>
           <cylinder length="0.018" radius="0.0127"/>
         </geometry>
@@ -91,12 +90,12 @@
         <mass value="0.01" />
         <origin xyz="0 0 0" />
         <inertia ixx="0.001" ixy="0.0" ixz="0.0"
-                 iyy="0.001" iyz="0.0" 
-                 izz="0.001" />
+                iyy="0.001" iyz="0.0" 
+                izz="0.001" />
       </inertial>
-   </link>
-   <link name="rear_wheel_link">
-    <collision>
+    </link>
+    <link name="rear_wheel_link">
+      <collision>
         <geometry>
           <cylinder length="0.018" radius="0.0127"/>
         </geometry>
@@ -106,32 +105,32 @@
         <mass value="0.01" />
         <origin xyz="0 0 0" />
         <inertia ixx="0.001" ixy="0.0" ixz="0.0"
-                 iyy="0.001" iyz="0.0" 
-                 izz="0.001" />
+                iyy="0.001" iyz="0.0" 
+                izz="0.001" />
       </inertial>
-   </link>
-<!--                 modify                     -->
-<!--              range_z: -0.007 ~ -0.008      -->
-<!--        if not modify in gazebo will shack  -->
-<!--                                            -->
-<!--             Fixed this Bug                 -->
-<!--             Finally param                  -->
-<!--          L:0.13 0 -0.125                   -->
-<!--          R:-0.13 0 -0.0084                 -->
-<!--                                            -->
-   <joint name="fornt_wheel_joint" type="fixed">
+    </link>
+    <!--                 modify                     -->
+    <!--              range_z: -0.007 ~ -0.008      -->
+    <!--        if not modify in gazebo will shack  -->
+    <!--                                            -->
+    <!--             Fixed this Bug                 -->
+    <!--             Finally param                  -->
+    <!--          L:0.13 0 -0.125                   -->
+    <!--          R:-0.13 0 -0.0084                 -->
+    <!--                                            -->
+    <joint name="fornt_wheel_joint" type="fixed">
       <origin xyz="0.13 0 -0.0125 " rpy="${-M_PI/2} 0 0" />
       <parent link="base_link" />
       <child link="front_wheel_link" />
-   </joint>
-   <joint name="rear_wheel_joint" type="fixed">
+    </joint>
+    <joint name="rear_wheel_joint" type="fixed">
       <origin xyz="-0.13 0 -0.0084 " rpy="${-M_PI/2} 0 0" />
       <parent link="base_link" />
       <child link="rear_wheel_link" />
-   </joint>
+    </joint>
 
-<!-- Roch sensors -->
- <!-- IMU Link is the standard mounting position for the R1371T IMU.-->
+    <!-- Roch sensors -->
+    <!-- IMU Link is the standard mounting position for the R1371T IMU.-->
     <!-- Can be modified with environment variables in /etc/ros/setup.bash -->
     <link name="imu_link">
       <inertial>
@@ -176,9 +175,9 @@
       <origin xyz="0.12695 -0.06874 0.0065" rpy="0 ${M_PI/2} 0" />
     </xacro:roch_cliff>
 
- <!-- roch Gazebo simulation details -->
-  <roch_robot_gazebo/>
+    <!-- roch Gazebo simulation details -->
+    <roch_robot_gazebo/>
  
-</xacro:macro>  
+  </xacro:macro>  
   
 </robot>

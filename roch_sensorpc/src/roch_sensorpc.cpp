@@ -104,7 +104,7 @@ void SensorPcNodelet::onInit()
   private_nh_.param("pointcloud_radius", r, 0.25); pc_radius_ = r;
   private_nh_.param("pointcloud_height", h, 0.04); pc_height_ = h;
   private_nh_.param("side_point_angle", angle, 0.34906585); 
-  private_nh_.param<std::string>("base_link_frame", base_link_frame, "/base_link");
+  private_nh_.param<std::string>("base_link_frame", base_link_frame, "base_link");
   private_nh_.param<bool>("ult_enable", ult_enable_, true); 
   private_nh_.param<bool>("psd_enable", psd_enable_, true);  
   private_nh_.param<bool>("cliff_enable", cliff_enable_, true); 
